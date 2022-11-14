@@ -1,17 +1,18 @@
-import { View,Modal, TextInput, StyleSheet} from "react-native"
+import { View,Modal, TextInput, StyleSheet ,Pressable} from "react-native"
 
 const CreditInput = ({show}) =>{
     return(
         <Modal  visible ={show} transparent={true}>
             <View style={styles.inputDirection}>
                 <View style ={styles.inputContainer}>
-                    <TextInput
-                    style={styles.textInput}
-                    placeholder='introduce el ingreso'/>
-                </View>
-            </View>
-            
-            
+                    <View style={styles.inputRow}>
+                        <TextInput
+                        style={styles.textInput}
+                        placeholder='introduce el ingreso'/>
+                    </View>
+                    
+                </View>    
+            </View>   
         </Modal>
     )
 }
@@ -23,7 +24,8 @@ const styles = StyleSheet.create({
         height:300,
         backgroundColor: '#ccff90',
         borderRadius:20,
-        alignItems:'center'
+        alignItems:'center',
+        alignContent:'flex-start'
     },
     
     inputDirection:{
@@ -33,7 +35,16 @@ const styles = StyleSheet.create({
         height:"100%"
     },
     textInput:{
-        backgroundColor:'#84fff'
+        marginTop:20,
+        backgroundColor:'#84ffff',
+        height:40,
+        width:"50%",
+        borderRadius:20
+    },
+    inputRow:{
+        flexDirection:'row',
+        alignContent:'flex-start',
+        width:"100%"
     }
 
 })
