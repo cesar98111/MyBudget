@@ -1,6 +1,11 @@
-import { View,Modal, TextInput, StyleSheet ,Pressable} from "react-native"
+import { View,Modal, TextInput, StyleSheet ,Pressable, Text} from "react-native"
+import NumericInput from "react-native-numeric-input"
+import { useState } from "react"
 
 const CreditInput = ({show}) =>{
+
+    const
+
     return(
         <Modal  visible ={show} transparent={true}>
             <View style={styles.inputDirection}>
@@ -9,8 +14,17 @@ const CreditInput = ({show}) =>{
                         <TextInput
                         style={styles.textInput}
                         placeholder='introduce el ingreso'/>
+
+                        <NumericInput type='up-down' 
+                        onChange={value => console.log(value)} />
+
+
                     </View>
-                    
+                    <View style={styles.inputRowSecond}>
+                        <Pressable style={styles.buttonAdd}>
+                            <Text style ={styles.textAdd}>añadir</Text>
+                        </Pressable>
+                    </View>
                 </View>    
             </View>   
         </Modal>
@@ -24,8 +38,11 @@ const styles = StyleSheet.create({
         height:300,
         backgroundColor: '#ccff90',
         borderRadius:20,
+        borderColor:"black",
+        borderStyle:"solid",
         alignItems:'center',
         alignContent:'flex-start'
+        
     },
     
     inputDirection:{
@@ -34,18 +51,43 @@ const styles = StyleSheet.create({
         width:"100%",
         height:"100%"
     },
+    buttonAdd:{
+        marginTop:10,
+        width:100,
+        height:40,
+        backgroundColor:"#29b6f6",
+    },
+    textAdd:{
+        textAlign:"center",
+        textAlignVertical:"center",
+        height:"100%"
+        
+    },
     textInput:{
         marginTop:20,
         backgroundColor:'#84ffff',
         height:40,
         width:"50%",
-        borderRadius:20
+        borderRadius:20,
+        alignContent:"stretch"
+    },
+    textInputSecond:{
+        flexDirection:"row",
+        alignContent:"center",
+        width:"100%"
     },
     inputRow:{
         flexDirection:'row',
-        alignContent:'flex-start',
+        justifyContent:'space-around',
         width:"100%"
+    },
+
+    inputRowSecond:{
+        flexDirection:'row',
+        justifyContent:'center',
+        width:"100%" 
     }
+
 
 })
 export default CreditInput
