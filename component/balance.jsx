@@ -3,14 +3,24 @@ import { useState } from 'react'
 import CreditInput from './creditInput'
 const Balance = () =>{
     const[show, setShow] = useState(false)
+    const[entry, setEntry] = useState({
+        amount:0,
+        concept:"",
+        date:""
+    })
+    const [balance, setbalance] = useState(0)
+
+    const addBalance = () =>{
+        setbalance(balance+entry.amount)
+    }
     return(
         <>
             <View style = {styles.balance}>
-                <Text style = {styles.balanceText}> Tu balance es: 1000$</Text>
+                <Text style = {styles.balanceText}> Tu balance es: {balance}</Text>
                 <Pressable style={styles.balanceAdd} onPress={()=>{setShow(true)}}>
                     <Text style={styles.addText}>+</Text>
                 </Pressable>
-                <CreditInput show={show}/>
+                <CreditInput show={show} setShow={setShow} entry={entry} setEntry={setEntry} add={addBalance}/>
             </View>
         </>
     )
