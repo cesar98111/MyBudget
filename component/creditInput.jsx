@@ -2,29 +2,29 @@ import { View,Modal, TextInput, StyleSheet ,Pressable, Text} from "react-native"
 import NumericInput from "react-native-numeric-input"
 import { useState } from "react"
 
-const CreditInput = ({show, setShow, entry, setEntry, add}) =>{
+const CreditInput = ({show, setShow, entrys, setEntrys, add}) =>{
 
 
     const amountHandle = (value)=>{
         let now = new Date()
         
-        setEntry((entry)=>{
+        setEntrys((entrys)=>{
             return{
-               ...entry,
+               ...entrys,
                amount:value,
                date:now.toLocaleString()
             }
         })
     }
     const conceptHandle = (value) =>{
-        setEntry((entry)=>{
+        setEntrys((entrys)=>{
             return{
-                ...entry,
+                ...entrys,
                 concept:value
             }  
         })
 
-        console.log(entry.concept)
+        console.log(entrys.concept)
     }
     
     const sendHandle = () =>{
@@ -41,7 +41,7 @@ const CreditInput = ({show, setShow, entry, setEntry, add}) =>{
                         style={styles.textInput}
                         placeholder='introduce el ingreso'
                         onChangeText={conceptHandle}
-                        value={entry.concept}/>
+                        value={entrys.concept}/>
 
                         <NumericInput type='up-down' 
                         onChange={value => amountHandle(value)} />

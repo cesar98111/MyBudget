@@ -1,13 +1,9 @@
 import {View,Text,StyleSheet, Pressable} from 'react-native'
 import { useState } from 'react'
 import CreditInput from './creditInput'
-const Balance = () =>{
+const Balance = ({entry, setEntry}) =>{
     const[show, setShow] = useState(false)
-    const[entry, setEntry] = useState({
-        amount:0,
-        concept:"",
-        date:""
-    })
+    
     const [balance, setbalance] = useState(0)
 
     const addBalance = () =>{
@@ -20,7 +16,7 @@ const Balance = () =>{
                 <Pressable style={styles.balanceAdd} onPress={()=>{setShow(true)}}>
                     <Text style={styles.addText}>+</Text>
                 </Pressable>
-                <CreditInput show={show} setShow={setShow} entry={entry} setEntry={setEntry} add={addBalance}/>
+                <CreditInput show={show} setShow={setShow} entrys={entry} setEntrys={setEntry} add={addBalance}/>
             </View>
         </>
     )
