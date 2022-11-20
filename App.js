@@ -37,6 +37,7 @@ export default function App() {
           return(
             <ItemTrasaction style={styles.itemTransaction}
             styleButton={styles.button}
+            styleModifyButton={styles.modifyButton}
             key={"ASDAD"+transactionData.item.concept}
             productId={"ASAD"+transactionData.item.concept}
             entry={transactionData.item}
@@ -67,6 +68,7 @@ const styles = StyleSheet.create({
     width:"80%"
   },
   itemTransaction:{
+    flexDirection:'row',
     height:50,
     backgroundColor:'#ccff90',
     marginBottom:10,
@@ -76,6 +78,11 @@ const styles = StyleSheet.create({
     height:20,
     width:"20%",
     backgroundColor:'red'
+  },
+  modifyButton:{
+    backgroundColor:'blue',
+    height:20,
+    width:"20%"
   }
 
 });
