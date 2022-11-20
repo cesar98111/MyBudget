@@ -1,22 +1,25 @@
 import {View,Text,StyleSheet, Pressable} from 'react-native'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import CreditInput from './creditInput'
-const Balance = ({entry, setEntry}) =>{
-    const[show, setShow] = useState(false)
+const Balance = ({addNewEntry, entry, setEntry, balance }) =>{
     
-    const [balance, setbalance] = useState(0)
-
-    const addBalance = () =>{
-        setbalance(balance+entry.amount)
-    }
+    const[show, setShow] = useState(false)
+    const[balaceColor, setBalanceColor] = useState('blue')
+    useEffect(()=>{
+        if(balance < 0){
+            setBalanceColor('red')
+        }else{
+            setBalanceColor('blue')
+        }
+    },[balance])
     return(
         <>
             <View style = {styles.balance}>
-                <Text style = {styles.balanceText}> Tu balance es: {balance}</Text>
+                <Text style = {{...styles.balanceText,color:balaceColor}}> {balance} $</Text>
                 <Pressable style={styles.balanceAdd} onPress={()=>{setShow(true)}}>
                     <Text style={styles.addText}>+</Text>
                 </Pressable>
-                <CreditInput show={show} setShow={setShow} entrys={entry} setEntrys={setEntry} add={addBalance}/>
+                <CreditInput show={show} setShow={setShow} entrys={entry} setEntrys={setEntry} addNewEntry={addNewEntry} />
             </View>
         </>
     )

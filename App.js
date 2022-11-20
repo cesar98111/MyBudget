@@ -1,4 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
+
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { useState } from 'react';
 import Balance from './component/balance';
@@ -9,22 +9,42 @@ export default function App() {
     concept:"",
     date:""
   })
+  const[newBalance, setNewBalance] = useState(0);
+  const[history, setHistory] = useState([])
 
+  const addNewEntry = (newEntry) =>{
+    setHistory(()=>[...history, newEntry])
+    addBalance(newEntry.amount)
+  }
+
+  const deleteEntry = (deleteEntry)=>{
+    setHistory(()=>history.filter((value)=>value.amount !== deleteEntry))
+    addBalance((-deleteEntry))
+  }
+  const addBalance = (balance) =>{
+    
+      setNewBalance(newBalance + balance)
+      console.log(newBalance)
+
+  }
   return (
     <View style={styles.container}>
-      <Balance entry={entry} setEntry={setEntry}/>
+      <Balance addNewEntry={addNewEntry} entry={entry} setEntry={setEntry} balance={newBalance}   />
       <Text style={styles.balance}></Text>
-      <FlatList data={entry} renderItem={(transactionData)=>{
-        const{key, value} = transactionData.item;
-
-
-        return(
-          <ItemTrasaction style={styles.itemTransaction}
-          key={key}
-          productId={key}
-          entry={transactionData}/>
-        )
-      }}/>
+      <View style={styles.itemList}>
+        <FlatList data={history} renderItem={(transactionData)=>{
+          
+          return(
+            <ItemTrasaction style={styles.itemTransaction}
+            styleButton={styles.button}
+            key={"ASDAD"+transactionData.item.concept}
+            productId={"ASAD"+transactionData.item.concept}
+            entry={transactionData.item}
+            deleteItem={deleteEntry}/>
+          )
+        }}/>
+      </View>
+      
 
       
       
@@ -43,10 +63,19 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent: 'flex-start'
   },
+  itemList:{
+    width:"80%"
+  },
   itemTransaction:{
-    height:30,
-    width:"80%",
-    backgroundColor:"red"
+    height:50,
+    backgroundColor:'#ccff90',
+    marginBottom:10,
+    
+  },
+  button:{
+    height:20,
+    width:"20%",
+    backgroundColor:'red'
   }
 
 });
