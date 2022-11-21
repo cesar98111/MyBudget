@@ -15,37 +15,46 @@ export default function App() {
   })
   const[newBalance, setNewBalance] = useState(0);
   const[history, setHistory] = useState([])
+
+
   useEffect(()=>{
+
     addBalance()
-  },[history])
-  
+
+  }, [history,newBalance])
+
   const addNewEntry = (newEntry) =>{
     setHistory(()=>[...history, newEntry])
-    addBalance(newEntry.amount)
+    
   }
   
-  const modifyEntry = (newEntry) =>{
-    console.log("modificacion: " + newEntry)
+  const modifyEntry = (id,newEntry) =>{
+    console.log(id)
     let lista = history
     
     lista=history.map((value)=>{
-      let a ={...value}
-      if(a.id == newEntry.id){
-        a.id = uuidv4()
+      console.log("valor actual id: "+ value.id + "valor nuevo id: "+ newEntry.id)
+      let a = {...value}
+      if(value.id == id){
+
         a.amount = newEntry.amount
         a.concept = newEntry.concept
         a.date = newEntry.date
+        console.log(a.amount)
+
       }
       return a
     })
+    
     setHistory(lista)
-    addBalance(newEntry.amount)
+    
+    
   }
 
   const deleteEntry = (deleteEntry)=>{
     setHistory(()=>history.filter((value)=>value.id !== deleteEntry.id))
 
-    addBalance((-deleteEntry.amount))
+    
   }
   const addBalance = () =>{
       let count =0
@@ -56,7 +65,7 @@ export default function App() {
   }
   return (
     <View style={styles.container}>
-      <Balance addNewEntry={addNewEntry} entry={entry} setEntry={setEntry} balance={newBalance}   />
+      <Balance addNewEntry={addNewEntry} balance={newBalance} modifyEntry={modifyEntry}   />
       <Text style={styles.balance}></Text>
       <View style={styles.itemList}>
         <FlatList data={history} renderItem={(transactionData)=>{

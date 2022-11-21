@@ -2,51 +2,82 @@ import { View,Modal, TextInput, StyleSheet ,Pressable, Text} from "react-native"
 import NumericInput from "react-native-numeric-input"
 import  'react-native-get-random-values' ; 
 import  {  v4  as  uuidv4  }  from  'uuid' ;
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-const CreditInput = ({show, setShow, entrys, setEntrys,  addNewEntry}) =>{
+const CreditInput = ({show, setShow, OldEntry, addNewEntry ,modify, modifyEntry}) =>{
    
-
+    const[entry, setEntry] = useState({
+        id:uuidv4(),
+        amount:0,
+        concept:"",
+        date:""
+    })
+    
     const amountHandle = (value)=>{
         let now = new Date()
         
-        setEntrys((entrys)=>{
+        setEntry((entry)=>{
             return{
-               ...entrys,
-               id:uuidv4(),
+               ...entry,
                amount:value,
                date:now.toLocaleString()
             }
         })
     }
     const conceptHandle = (value) =>{
-        setEntrys((entrys)=>{
+        setEntry((entry)=>{
             return{
-                ...entrys,
+                ...entry,
                 concept:value
             }  
         })
         
-        console.log(entrys.concept)
-    }
-    
-    const sendHandle = () =>{
         
-        addNewEntry(entrys)
-        setShow(false)
-        setEntrys((entrys)=>{
+    }
+    const modifyHandle = () =>{
+
+        console.log("viejo: "+OldEntry)
+        setEntry((entry)=>{
             return{
-                ...entrys,
+                ...entry,
+                id:OldEntry
+            }
+        })
+        
+        
+        modifyEntry(OldEntry, entry)
+        setShow(false)
+        setEntry((entry)=>{
+            return{
+                ...entry,
                 amount:0,
                 concept:"",
-                date:""
-                
+                date:""   
             }
         })
     }
 
+    const sendHandle = () =>{
+       
+
+        console.log("nuevo: "+ entry.id)
+        addNewEntry(entry)
+        setShow(false)
+        setEntry((entry)=>{
+            return{
+                ...entry,
+                id:uuidv4(),
+                amount:0,
+                concept:"",
+                date:""   
+            }
+            
+        })
+        console.log(entry)
+    }
+
     return(
-        <Modal  visible ={show} transparent={true}>
+        <Modal  visible ={show} transparent={true} animationType={"slide"}>
             <View style={styles.inputDirection}>
                 <View style ={styles.inputContainer}>
                     <View style={styles.inputRow}>
@@ -54,18 +85,28 @@ const CreditInput = ({show, setShow, entrys, setEntrys,  addNewEntry}) =>{
                         style={styles.textInput}
                         placeholder='introduce el ingreso'
                         onChangeText={conceptHandle}
-                        value={entrys.concept}/>
+                        value={entry.concept}/>
 
                         <NumericInput type='up-down' 
                         onChange={value => amountHandle(value)} />
 
 
                     </View>
-                    <View style={styles.inputRowSecond}>
-                        <Pressable style={styles.buttonAdd} onPress={sendHandle}>
-                            <Text style ={styles.textAdd}>añadir</Text>
-                        </Pressable>
-                    </View>
+                    {
+                        modify === false
+                        ?<View style={styles.inputRowSecond}>
+                            <Pressable style={styles.buttonAdd} onPress={() =>sendHandle()}>
+                                <Text style ={styles.textAdd}>añadir</Text>
+                            </Pressable>
+                        </View>
+                        :
+                        <View style={styles.inputRowSecond}>
+                            <Pressable style={styles.buttonAdd} onPress={()=> modifyHandle()}>
+                                <Text style ={styles.textAdd}>modificar</Text>
+                            </Pressable>
+                        </View>
+                    }
+                    
                 </View>    
             </View>   
         </Modal>
