@@ -1,7 +1,7 @@
 import {View,Text,StyleSheet, Pressable} from 'react-native'
 import { useEffect, useState } from 'react'
 import CreditInput from './creditInput'
-const Balance = ({addNewEntry, entry, setEntry, balance }) =>{
+const Balance = ({addNewEntry, entry, setEntry, balance,  }) =>{
     
     const[show, setShow] = useState(false)
     const[balaceColor, setBalanceColor] = useState('blue')
@@ -12,6 +12,7 @@ const Balance = ({addNewEntry, entry, setEntry, balance }) =>{
             setBalanceColor('blue')
         }
     },[balance])
+    
     return(
         <>
             <View style = {styles.balance}>
