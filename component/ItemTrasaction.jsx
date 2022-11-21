@@ -1,7 +1,11 @@
+import { useEffect, useState } from "react"
 import { View, Text, StyleSheet,Pressable } from "react-native"
+import CreditInput from "./creditInput";
+import ItemModify from "./itemModify";
+const ItemTrasaction = ({style, styleText, styleButton, styleModifyButton, entry, setEntry, deleteItem, modify}) =>{
 
-const ItemTrasaction = ({style, styleText, styleButton, styleModifyButton, entry,deleteItem}) =>{
-
+const [show, setShow] = useState(false);
+   
 
     return (
         <View style={{...styles.container,...style,entry}}>
@@ -9,15 +13,17 @@ const ItemTrasaction = ({style, styleText, styleButton, styleModifyButton, entry
                 descripcion: {entry.concept} valor: {entry.amount}
             </Text>
             <Pressable style={{...styles.button,...styleButton}}>
-                <Text style={styles.buttonText} onPress={()=> deleteItem(entry.amount)} >
+                <Text style={styles.buttonText} onPress={()=> deleteItem(entry)} >
                     eliminar
                 </Text>
             </Pressable>
-            <Pressable style={{ ...styles.modifyButton,...styleModifyButton}}>
+            <Pressable style={{ ...styles.modifyButton,...styleModifyButton}} onPress={()=>setShow(!show)}>
                 <Text>
                     modificar
                 </Text>
             </Pressable>
+            <ItemModify show={show} setShow={setShow} entrys={entry} modify={modify} setEntrys={setEntry}/>
+
             
         </View>
     )

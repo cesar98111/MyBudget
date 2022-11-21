@@ -1,51 +1,44 @@
-import { View,Modal, TextInput, StyleSheet ,Pressable, Text} from "react-native"
+import { Modal, View, Text, StyleSheet, TextInput, Pressable } from "react-native"
 import NumericInput from "react-native-numeric-input"
-import  'react-native-get-random-values' ; 
-import  {  v4  as  uuidv4  }  from  'uuid' ;
 import { useState } from "react"
 
-const CreditInput = ({show, setShow, entrys, setEntrys,  addNewEntry}) =>{
-   
-
+const ItemModify=({show, setShow, entrys,modify, setEntrys})=>{
+    const[entry, setEntry] = useState({
+        id:entrys.id,
+        amount:0,
+        concept:"",
+        date:""
+    })
     const amountHandle = (value)=>{
         let now = new Date()
         
-        setEntrys((entrys)=>{
+        setEntry((entry)=>{
             return{
-               ...entrys,
-               id:uuidv4(),
+               ...entry,
                amount:value,
                date:now.toLocaleString()
             }
         })
     }
     const conceptHandle = (value) =>{
-        setEntrys((entrys)=>{
+        setEntry((entry)=>{
             return{
-                ...entrys,
+                ...entry,
                 concept:value
             }  
         })
         
-        console.log(entrys.concept)
+       
     }
     
     const sendHandle = () =>{
         
-        addNewEntry(entrys)
+        modify(entry)
         setShow(false)
-        setEntrys((entrys)=>{
-            return{
-                ...entrys,
-                amount:0,
-                concept:"",
-                date:""
-                
-            }
-        })
     }
-
+    
     return(
+    
         <Modal  visible ={show} transparent={true}>
             <View style={styles.inputDirection}>
                 <View style ={styles.inputContainer}>
@@ -54,7 +47,8 @@ const CreditInput = ({show, setShow, entrys, setEntrys,  addNewEntry}) =>{
                         style={styles.textInput}
                         placeholder='introduce el ingreso'
                         onChangeText={conceptHandle}
-                        value={entrys.concept}/>
+                        value={entry.concept}
+                        />
 
                         <NumericInput type='up-down' 
                         onChange={value => amountHandle(value)} />
@@ -71,7 +65,6 @@ const CreditInput = ({show, setShow, entrys, setEntrys,  addNewEntry}) =>{
         </Modal>
     )
 }
-
 
 const styles = StyleSheet.create({
     inputContainer:{
@@ -131,4 +124,5 @@ const styles = StyleSheet.create({
 
 
 })
-export default CreditInput
+
+export default ItemModify
