@@ -26,9 +26,7 @@ const ItemModify=({show, setShow, entrys,modify, setEntrys})=>{
                 ...entry,
                 concept:value
             }  
-        })
-        
-       
+        })   
     }
     
     const sendHandle = () =>{

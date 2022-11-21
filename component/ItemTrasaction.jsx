@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import { View, Text, StyleSheet,Pressable } from "react-native"
 import CreditInput from "./creditInput";
-import ItemModify from "./itemModify";
-const ItemTrasaction = ({style, styleText, styleButton, styleModifyButton, entry, setEntry, deleteItem, modify}) =>{
+
+
+const ItemTrasaction = ({style, styleText, styleButton, styleModifyButton, entry,  deleteItem, modify}) =>{
 
 const [show, setShow] = useState(false);
    
@@ -22,7 +23,7 @@ const [show, setShow] = useState(false);
                     modificar
                 </Text>
             </Pressable>
-            <ItemModify show={show} setShow={setShow} entrys={entry} modify={modify} setEntrys={setEntry}/>
+            <CreditInput show={show}  setShow={setShow} OldEntry={entry.id} modify={true} modifyEntry={modify}/>
 
             
         </View>
