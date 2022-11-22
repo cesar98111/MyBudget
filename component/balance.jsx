@@ -1,7 +1,7 @@
 import {View,Text,StyleSheet, Pressable} from 'react-native'
 import { useEffect, useState } from 'react'
 import CreditInput from './creditInput'
-const Balance = ({addNewEntry, entry, setEntry, balance  }) =>{
+const Balance = ({addNewEntry, balance  }) =>{
     
     const[show, setShow] = useState(false)
     const[balaceColor, setBalanceColor] = useState('blue')
@@ -9,29 +9,34 @@ const Balance = ({addNewEntry, entry, setEntry, balance  }) =>{
         if(balance < 0){
             setBalanceColor('red')
         }else{
-            setBalanceColor('blue')
+            setBalanceColor('green')
         }
     },[balance])
     
     return(
-        <>
-            <View style = {styles.balance}>
+        <View style={styles.balanceContainer}>
+            <View style={styles.header}></View>
+            <View style = {styles.balance}> 
                 <Text style = {{...styles.balanceText,color:balaceColor}}> {balance} $</Text>
-                <Pressable style={styles.balanceAdd} onPress={()=>{setShow(true)}}>
-                    <Text style={styles.addText}>+</Text>
-                </Pressable>
-                <CreditInput show={show} setShow={setShow} addNewEntry={addNewEntry} modify={false}  />
             </View>
-        </>
+        </View>
     )
 }
 const styles = StyleSheet.create({
+    header:{
+        backgroundColor:'#1e88e5',
+        height:80
+    },
     balance:{
-      marginTop:100,
-      backgroundColor:'#ccff90',
-      borderRadius:20,
-      height:100,
-      width:'80%'
+        alignItems:"center",
+        justifyContent:"center",
+        backgroundColor:'#6ab7ff',
+        height:100,
+        width:'100%'
+    },
+    balanceContainer:{
+        width:"100%",
+        backgroundColor:"black"
     },
     balanceAdd:{
         height:40,
@@ -45,9 +50,11 @@ const styles = StyleSheet.create({
     balanceText:{
         textAlignVertical:'center',
         textAlign:'center',
-        height:'60%',
+        width:"30%",
+        height:'25%',
         textDecorationStyle: 'bold',
-        
+        backgroundColor:"#b3e5fc",
+        borderRadius:5
 
     },
     addText:{

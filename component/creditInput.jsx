@@ -14,6 +14,8 @@ const CreditInput = ({show, setShow, OldEntry, addNewEntry ,modify, modifyEntry}
     })
     
     const amountHandle = (value)=>{
+        value = parseInt(value)
+        
         let now = new Date()
         
         setEntry((entry)=>{
@@ -83,12 +85,16 @@ const CreditInput = ({show, setShow, OldEntry, addNewEntry ,modify, modifyEntry}
                     <View style={styles.inputRow}>
                         <TextInput
                         style={styles.textInput}
-                        placeholder='introduce el ingreso'
+                        placeholder='introduce el concepto'
                         onChangeText={conceptHandle}
                         value={entry.concept}/>
 
-                        <NumericInput type='up-down' 
-                        onChange={value => amountHandle(value)} />
+                        <TextInput
+                        style={styles.textInput}
+                        placeholder='introduce el ingreso'
+                        onChangeText={amountHandle}
+                        keyboardType={"number-pad"}
+                        value={entry.amount}/>
 
 
                     </View>
@@ -119,11 +125,11 @@ const styles = StyleSheet.create({
         width:300,
         height:300,
         backgroundColor: '#ccff90',
-        borderRadius:20,
         borderColor:"black",
         borderStyle:"solid",
+        justifyContent:"center",
         alignItems:'center',
-        alignContent:'flex-start'
+        
         
     },
     
@@ -133,43 +139,7 @@ const styles = StyleSheet.create({
         width:"100%",
         height:"100%"
     },
-    buttonAdd:{
-        marginTop:10,
-        width:100,
-        height:40,
-        backgroundColor:"#29b6f6",
-    },
-    textAdd:{
-        textAlign:"center",
-        textAlignVertical:"center",
-        height:"100%"
-        
-    },
-    textInput:{
-        marginTop:20,
-        backgroundColor:'#84ffff',
-        height:40,
-        width:"50%",
-        borderRadius:20,
-        alignContent:"stretch"
-    },
-    textInputSecond:{
-        flexDirection:"row",
-        alignContent:"center",
-        width:"100%"
-    },
-    inputRow:{
-        flexDirection:'row',
-        justifyContent:'space-around',
-        width:"100%"
-    },
-
-    inputRowSecond:{
-        flexDirection:'row',
-        justifyContent:'center',
-        width:"100%" 
-    }
-
+    
 
 })
 export default CreditInput
