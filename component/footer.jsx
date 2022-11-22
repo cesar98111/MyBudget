@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
         backgroundColor:"#73e8ff",
         borderRadius:20,
         marginRight:40
+        
     },
     TextButtonAdd:{
         height:"100%",
