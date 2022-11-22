@@ -28,8 +28,9 @@ const styles = StyleSheet.create({
         width:40,
         backgroundColor:"#73e8ff",
         borderRadius:20,
-        marginRight:40
-        
+        marginRight:40,
+        marginBottom:"45%"
+
     },
     TextButtonAdd:{
         height:"100%",

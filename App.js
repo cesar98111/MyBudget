@@ -8,6 +8,8 @@ import Footer from './component/footer';
 import  {  v4  as  uuidv4  }  from  'uuid' ;
 
 export default function App() {
+  
+
   const[entry, setEntry] = useState({
     id:"",
     amount:0,
@@ -17,7 +19,7 @@ export default function App() {
   const[newBalance, setNewBalance] = useState(0);
   const[history, setHistory] = useState([])
 
-
+  
   useEffect(()=>{
 
     addBalance()
@@ -83,7 +85,7 @@ export default function App() {
             />
           )
         }}/>
-      </View>
+    </View>
       
       <Footer addNewEntry={addNewEntry}/>
       
@@ -98,14 +100,14 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 0,
-    backgroundColor: '#fff',
+    backgroundColor: '#efefef',
     flexDirection:'column',
     alignItems:'center',
     justifyContent: 'flex-start'
   },
   itemList:{
     width:"80%",
-    height:"57%"
+    height:"62%",
   },
   itemTransaction:{
     flexDirection:'row',
