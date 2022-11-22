@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Balance from './component/balance';
 import ItemTrasaction from './component/ItemTrasaction';
 import  'react-native-get-random-values' ; 
+import Footer from './component/footer';
 import  {  v4  as  uuidv4  }  from  'uuid' ;
 
 export default function App() {
@@ -48,7 +49,6 @@ export default function App() {
     
     setHistory(lista)
     
-    
   }
 
   const deleteEntry = (deleteEntry)=>{
@@ -84,8 +84,11 @@ export default function App() {
           )
         }}/>
       </View>
-
+      
+      <Footer addNewEntry={addNewEntry}/>
+      
     </View>
+    
   );
 }
 
@@ -101,7 +104,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
   },
   itemList:{
-    width:"80%"
+    width:"80%",
+    height:"57%"
   },
   itemTransaction:{
     flexDirection:'row',
@@ -119,6 +123,7 @@ const styles = StyleSheet.create({
     backgroundColor:'blue',
     height:20,
     width:"20%"
-  }
+  },
+  
 
 });
