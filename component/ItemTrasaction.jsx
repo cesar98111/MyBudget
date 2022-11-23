@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { View, Text, StyleSheet,Pressable } from "react-native"
+import { View, Text, StyleSheet,Pressable,Image } from "react-native"
 import CreditInput from "./creditInput";
 
 
@@ -10,19 +10,33 @@ const [show, setShow] = useState(false);
 
     return (
         <View style={{...styles.container,...style,entry}}>
-            <Text style={{...styles.ItemTrasaction,...styleText}}>
-                descripcion: {entry.concept} valor: {entry.amount}
-            </Text>
-            <Pressable style={{...styles.button,...styleButton}}>
-                <Text style={styles.buttonText} onPress={()=> deleteItem(entry)} >
-                    eliminar
+            <View style={styles.separator}>
+                <Text style={{...styles.ItemTrasaction,...styleText}}>
+                    descripcion: {entry.concept} 
                 </Text>
-            </Pressable>
-            <Pressable style={{ ...styles.modifyButton,...styleModifyButton}} onPress={()=>setShow(!show)}>
-                <Text>
-                    modificar
+            </View>
+            <View style={styles.separator}>
+                <Text style={{...styles.ItemTrasaction,...styleText}}>
+                {entry.amount <= 0 ? "Ingreso" : "gasto"} : {entry.amount} 
                 </Text>
-            </Pressable>
+            </View>
+            <View style={styles.separator}>
+                <Text style={{...styles.ItemTrasaction,...styleText}}>
+                    fecha: {entry.date}
+                </Text>
+            </View>
+            
+            
+            
+            <View style={styles.buttonGroup}>
+                <Pressable style={{...styles.button,...styleButton}} onPress={()=> deleteItem(entry)}>
+                    <Image  style={styles.icon} source={require("../assets/eliminar.png")}></Image>
+                </Pressable>
+                <Pressable style={{ ...styles.modifyButton,...styleModifyButton}} onPress={()=>setShow(!show)}>
+                    <Image  style={styles.icon} source={require("../assets/editar.png")}></Image>
+                </Pressable>
+            </View>
+            
             <CreditInput show={show}  setShow={setShow} OldEntry={entry.id} modify={true} modifyEntry={modify}/>
 
             
@@ -36,14 +50,38 @@ const styles = StyleSheet.create({
 
     },
     button:{
-        backgroundColor: 'white'
+        borderRadius:5,
+        backgroundColor: 'white',
+        justifyContent:"center",
+        alignItems:"center"
     },
     buttonText:{
         color: "white"
     },
     modifyButton:{
-        backgroundColor:"white"
+        borderRadius:5,
+        backgroundColor:"white",
+        justifyContent:"center",
+        alignItems:"center"
+    },
+    buttonGroup:{
+        width:"100%",
+        flexDirection:"row",
+        justifyContent:"space-around",
+        marginTop: 15,
+        height:40
+    },
+    separator:{
+        width:"80%",
+        borderBottomWidth: 1,
+        borderColor:"#1e88e5"
+        
+    },
+    icon:{
+        width:20,
+        height:20
     }
+
 })
 
 export default ItemTrasaction

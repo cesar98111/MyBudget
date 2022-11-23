@@ -32,11 +32,11 @@ export default function App() {
   }
   
   const modifyEntry = (id,newEntry) =>{
-    console.log(id)
+    
     let lista = history
     
     lista=history.map((value)=>{
-      console.log("valor actual id: "+ value.id + "valor nuevo id: "+ newEntry.id)
+      
       let a = {...value}
       if(value.id == id){
 
@@ -76,6 +76,7 @@ export default function App() {
             <ItemTrasaction style={styles.itemTransaction}
             styleButton={styles.button}
             styleModifyButton={styles.modifyButton}
+            styleText={styles.textItem}
             key={transactionData.item.id}
             productId={transactionData.item.id}
             entry={transactionData.item}
@@ -110,20 +111,31 @@ const styles = StyleSheet.create({
     height:"62%",
   },
   itemTransaction:{
-    flexDirection:'row',
-    height:50,
-    backgroundColor:'#ccff90',
+    flexDirection:"column",
+    alignItems:"center",
+    justifyContent:"center",
+    height:190,
+    backgroundColor:"#6ab7ff",
     marginBottom:10,
+    borderRadius:5 
+    
+  },
+  textItem:{
+    marginBottom:7,
+    fontSize:17,
+    fontWeight:"bold",
+    borderEndWidth:10,
+    borderLeftColor:"black"
     
   },
   button:{
-    height:20,
+    height:"100%",
     width:"20%",
-    backgroundColor:'red'
+    backgroundColor:'#ff3d00'
   },
   modifyButton:{
-    backgroundColor:'blue',
-    height:20,
+    backgroundColor:'#bef67a',
+    height:"100%",
     width:"20%"
   },
   

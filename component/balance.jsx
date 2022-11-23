@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
         height:'25%',
         textDecorationStyle: 'bold',
         backgroundColor:"#b3e5fc",
-        borderRadius:5
+        borderRadius:5,
+        fontWeight:"bold"
 
     },
     addText:{
