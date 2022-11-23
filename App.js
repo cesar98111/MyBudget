@@ -5,7 +5,7 @@ import Balance from './component/balance';
 import ItemTrasaction from './component/ItemTrasaction';
 import  'react-native-get-random-values' ; 
 import Footer from './component/footer';
-import  {  v4  as  uuidv4  }  from  'uuid' ;
+import { Colors } from './constant/colors';
 
 export default function App() {
   
@@ -39,12 +39,10 @@ export default function App() {
       
       let a = {...value}
       if(value.id == id){
-
         a.amount = newEntry.amount
         a.concept = newEntry.concept
         a.date = newEntry.date
         console.log(a.amount)
-
       }
       return a
     })
@@ -101,7 +99,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 0,
-    backgroundColor: '#efefef',
+    backgroundColor: Colors.containers.body,
     flexDirection:'column',
     alignItems:'center',
     justifyContent: 'flex-start'
@@ -115,7 +113,7 @@ const styles = StyleSheet.create({
     alignItems:"center",
     justifyContent:"center",
     height:190,
-    backgroundColor:"#6ab7ff",
+    backgroundColor:Colors.containers.prymary,
     marginBottom:10,
     borderRadius:5 
     
@@ -125,16 +123,16 @@ const styles = StyleSheet.create({
     fontSize:17,
     fontWeight:"bold",
     borderEndWidth:10,
-    borderLeftColor:"black"
+    
     
   },
   button:{
     height:"100%",
     width:"20%",
-    backgroundColor:'#ff3d00'
+    backgroundColor:Colors.button.cancel
   },
   modifyButton:{
-    backgroundColor:'#bef67a',
+    backgroundColor:Colors.button.acept,
     height:"100%",
     width:"20%"
   },

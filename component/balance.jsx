@@ -1,6 +1,6 @@
 import {View,Text,StyleSheet, Pressable} from 'react-native'
 import { useEffect, useState } from 'react'
-import CreditInput from './creditInput'
+import { Colors } from '../constant/colors'
 const Balance = ({addNewEntry, balance  }) =>{
     
     const[show, setShow] = useState(false)
@@ -24,45 +24,31 @@ const Balance = ({addNewEntry, balance  }) =>{
 }
 const styles = StyleSheet.create({
     header:{
-        backgroundColor:'#1e88e5',
+        backgroundColor:Colors.containers.prymariDark,
         height:80
     },
     balance:{
         alignItems:"center",
         justifyContent:"center",
-        backgroundColor:'#6ab7ff',
+        backgroundColor:Colors.containers.prymary,
         height:100,
         width:'100%'
     },
     balanceContainer:{
         width:"100%",
-        backgroundColor:"black"
-    },
-    balanceAdd:{
-        height:40,
-        width:40,
-        alignSelf:'flex-end',
-        backgroundColor: '#29b6f6',
-        borderRadius: 20,
-        marginRight:20,
-        marginBottom:20,
+        
     },
     balanceText:{
         textAlignVertical:'center',
         textAlign:'center',
         width:"30%",
         height:'25%',
-        textDecorationStyle: 'bold',
-        backgroundColor:"#b3e5fc",
+        backgroundColor:Colors.containers.prymariLight,
         borderRadius:5,
         fontWeight:"bold"
 
     },
-    addText:{
-        textAlign:'center',
-        height:'100%',
-        textAlignVertical:'center'
-    },
+    
     container: {
       flex: 0,
       backgroundColor: '#fff',
