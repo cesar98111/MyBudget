@@ -21,7 +21,11 @@ const CreditInput = ({show, setShow, OldEntry, addNewEntry ,modify, modifyEntry}
     const amountHandle = (value)=>{
         value = parseInt(value)
         
+<<<<<<< HEAD
          
+=======
+        let now = new Date()
+>>>>>>> calendar
         
         setEntry((entry)=>{
             return{
