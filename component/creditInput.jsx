@@ -1,14 +1,16 @@
 import { View,Modal, TextInput, StyleSheet ,Pressable, Text, Image} from "react-native"
-
+import Calendar from "./calendar";
+import { Colors } from "../constant/colors";
 import  'react-native-get-random-values' ; 
 import  {  v4  as  uuidv4  }  from  'uuid' ;
 import { useState,useEffect } from "react";
 
 
+
 const CreditInput = ({show, setShow, OldEntry, addNewEntry ,modify, modifyEntry}) =>{
     
     const[showMessage, setShowMessage] = useState(false);
-
+    const[showCalendar, setShowCalendar]= useState(false);
     const[entry, setEntry] = useState({
         id:uuidv4(),
         amount:0,
@@ -49,26 +51,32 @@ const CreditInput = ({show, setShow, OldEntry, addNewEntry ,modify, modifyEntry}
     }
 
     const modifyHandle = () =>{
+        if((entry.amount!==0)&&(entry.concept!=="")&&(entry.date!=="")){
+            setShowMessage(false)
+            
+            setEntry((entry)=>{
+                return{
+                    ...entry,
+                    id:OldEntry
+                }
+            })
+            
+            
+            modifyEntry(OldEntry, entry)
+            setShow(false)
+            setEntry((entry)=>{
+                return{
+                    ...entry,
+                    amount:0,
+                    concept:"",
+                    date:""   
+                }
+            })
+        }else{
+            setShowMessage(true)
+        }
 
-        console.log("viejo: "+OldEntry)
-        setEntry((entry)=>{
-            return{
-                ...entry,
-                id:OldEntry
-            }
-        })
         
-        
-        modifyEntry(OldEntry, entry)
-        setShow(false)
-        setEntry((entry)=>{
-            return{
-                ...entry,
-                amount:0,
-                concept:"",
-                date:""   
-            }
-        })
     }
 
     const sendHandle = () =>{
@@ -116,13 +124,10 @@ const CreditInput = ({show, setShow, OldEntry, addNewEntry ,modify, modifyEntry}
                         onChangeText={amountHandle}
                         keyboardType={"number-pad"}
                         value={entry.amount}/>
-
-                        <TextInput
-                        style={styles.textInput}
-                        placeholder='introduce una fecha'
-                        onChangeText={dateHandle}
-                        value={entry.date}/>
                         
+                        <Pressable style={styles.textInput} onPress={()=>setShowCalendar(!showCalendar)}>
+                            <Text style={styles.textDateInput}>Añadir fecha</Text>
+                        </Pressable>
 
                     </View>
                     {
@@ -147,9 +152,10 @@ const CreditInput = ({show, setShow, OldEntry, addNewEntry ,modify, modifyEntry}
                             </Pressable>
                             
                         }
-                        <Pressable style={styles.buttonCancel} onPress={()=> setShow(!show)}>
+                        <Pressable style={styles.buttonCancel} onPress={()=>{ setShow(!show); setShowMessage(false)}}>
                             <Text style={styles.textCancel}>Cancelar</Text>
                         </Pressable>
+                        <Calendar dateHandle={dateHandle} show={showCalendar} setShow={setShowCalendar}/>
                     </View>
                     
                     
@@ -164,8 +170,7 @@ const styles = StyleSheet.create({
     inputContainer:{
         width:300,
         height:300,
-        backgroundColor: '#1e88e5',
-        borderColor:"black",
+        backgroundColor:Colors.containers.prymariDark,
         borderStyle:"solid",
         justifyContent:"space-around",
         alignItems:'center',
@@ -201,19 +206,25 @@ const styles = StyleSheet.create({
     buttonAdd:{
         height:25,
         width:"30%",
-        backgroundColor:"#bef67a"
+        backgroundColor:Colors.button.acept
     },
     buttonCancel:{
         height:25,
         width:"30%",
-        backgroundColor:"#ff3d00"
+        backgroundColor:Colors.button.cancel
     },
     textInput:{
-        backgroundColor:"#73e8ff",
+        backgroundColor:Colors.button.add,
         width:"80%",
         height:40,
         marginBottom:10,
         color:"gray"
+    },
+    textDateInput:{
+        height:"100%",
+        textAlign:"center",
+        textAlignVertical:"center",
+        fontWeight:"bold"
     },
     textAdd:{
         width:"100%",

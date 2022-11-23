@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { View, Text, StyleSheet,Pressable,Image } from "react-native"
 import CreditInput from "./creditInput";
-
+import { Colors } from "../constant/colors";
 
 const ItemTrasaction = ({style, styleText, styleButton, styleModifyButton, entry,  deleteItem, modify}) =>{
 
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     separator:{
         width:"80%",
         borderBottomWidth: 1,
-        borderColor:"#1e88e5"
+        borderColor:Colors.containers.prymariDark
         
     },
     icon:{
@@ -85,3 +85,5 @@ const styles = StyleSheet.create({
 })
 
 export default ItemTrasaction
+
+
