@@ -21,7 +21,7 @@ const CreditInput = ({show, setShow, OldEntry, addNewEntry ,modify, modifyEntry}
     const amountHandle = (value)=>{
         value = parseInt(value)
         
-        let now = new Date()
+         
         
         setEntry((entry)=>{
             return{
