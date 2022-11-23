@@ -2,12 +2,13 @@ import { View,Modal, TextInput, StyleSheet ,Pressable, Text, Image} from "react-
 
 import  'react-native-get-random-values' ; 
 import  {  v4  as  uuidv4  }  from  'uuid' ;
-import { useState } from "react";
-import DatePicker from "react-native-date-picker";
+import { useState,useEffect } from "react";
+
 
 const CreditInput = ({show, setShow, OldEntry, addNewEntry ,modify, modifyEntry}) =>{
     
-    
+    const[showMessage, setShowMessage] = useState(false);
+
     const[entry, setEntry] = useState({
         id:uuidv4(),
         amount:0,
@@ -71,23 +72,32 @@ const CreditInput = ({show, setShow, OldEntry, addNewEntry ,modify, modifyEntry}
     }
 
     const sendHandle = () =>{
-       
-
-        console.log("nuevo: "+ entry.id)
-        addNewEntry(entry)
-        setShow(false)
-        setEntry((entry)=>{
-            return{
-                ...entry,
-                id:uuidv4(),
-                amount:0,
-                concept:"",
-                date:""   
-            }
+        if((entry.amount!==0)&&(entry.concept!=="")&&(entry.date!=="")){
+            setShowMessage(false)
+            addNewEntry(entry)
+            setShow(false)
+            setEntry((entry)=>{
+                return{
+                    ...entry,
+                    id:uuidv4(),
+                    amount:0,
+                    concept:"",
+                    date:""   
+                }
             
-        })
-        console.log(entry)
+            })
+           
+        }else{
+            setShowMessage(true)
+            
+        }
+
+        
+        
     }
+    
+   
+    
 
     return(
         <Modal  visible ={show} transparent={true} animationType={"slide"}>
@@ -111,17 +121,24 @@ const CreditInput = ({show, setShow, OldEntry, addNewEntry ,modify, modifyEntry}
                         style={styles.textInput}
                         placeholder='introduce una fecha'
                         onChangeText={dateHandle}
-                        keyboardType={"number-pad"}
                         value={entry.date}/>
                         
 
                     </View>
+                    {
+                        showMessage === true 
+                        ? <View style={styles.message}>
+                            <Text style={styles.messageText}>Por favor introduzca todos los campos</Text>
+                          </View>
+                        : null
+                    }
+                    
                     <View style={styles.groupButton}>
                         {
                             modify === false
                             ?
                             <Pressable style={styles.buttonAdd} onPress={() =>sendHandle()}>
-                                <Text style ={styles.textAdd}>modificar</Text>
+                                <Text style ={styles.textAdd}>añadir</Text>
                             </Pressable>
                             
                             :
@@ -154,7 +171,15 @@ const styles = StyleSheet.create({
         alignItems:'center',
 
     },
-    
+    message:{
+        width:"90%",
+        backgroundColor:"red"
+    },
+    messageText:{
+        whith:"100%",
+        fontWeight:"bold",
+        textAlign:"center"
+    },
     inputDirection:{
         justifyContent:"center",
         alignItems:"center",
